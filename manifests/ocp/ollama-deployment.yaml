@@ -1,0 +1,53 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ollama-deployment
+  namespace: open-webui
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ollama
+  template:
+    metadata:
+      labels:
+        app: ollama
+    spec:
+      containers:
+      - name: ollama
+        image: centos-hetzner.lab.local:8443/init/ollama-ocp:1.0
+        ports:
+        - containerPort: 11434
+        resources:
+          requests:
+            cpu: "2000m"
+            memory: "2Gi"
+          limits:
+            cpu: "4000m"
+            memory: "4Gi"
+            nvidia.com/gpu: "0"
+        volumeMounts:
+        - name: ollama-volume
+          mountPath: /home/ollama/.ollama
+        tty: true
+      volumes:
+      - name: ollama-volume
+        persistentVolumeClaim:
+          claimName: ollama-service-pvc
+      imagePullSecrets:
+      - name: myregistrykey
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  labels:
+    app: ollama
+  name: ollama-service-pvc
+  namespace: open-webui
+spec:
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 30Gi
+  storageClassName: ocs-storagecluster-cephfs

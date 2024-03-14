@@ -1,0 +1,14 @@
+apiVersion: route.openshift.io/v1
+kind: Route
+metadata:
+  name: ollama-route
+  namespace: open-webui
+spec:
+  host: ollama-service.apps.lab.local
+  to:
+    kind: Service
+    name: ollama-service
+  port:
+    targetPort: 11434
+  tls:
+    termination: edge

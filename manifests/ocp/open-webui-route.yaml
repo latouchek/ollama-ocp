@@ -1,0 +1,12 @@
+apiVersion: route.openshift.io/v1
+kind: Route
+metadata:
+  name: open-webui-route
+  namespace: open-webui
+spec:
+  host: ollama-webui.apps.lab.local
+  to:
+    kind: Service
+    name: open-webui-service
+  port:
+    targetPort: 8080
