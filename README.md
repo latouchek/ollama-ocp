@@ -107,7 +107,7 @@ spec:
 2. **Apply the manifests**:
 
 ```bash
-oc apply -f ./base
+oc apply -f ./ocp
 ```
 
 3. **Monitor the deployment**:
