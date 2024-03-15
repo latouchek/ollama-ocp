@@ -35,7 +35,8 @@ spec:
   - metadata:
       name: ollama-volume
     spec:
-      accessModes: [ "ReadWriteOnce" ]
+      accessModes: [ "ReadWriteMany" ]
       resources:
         requests:
           storage: 30Gi
+      storageClassName: ocs-storagecluster-cephfs
