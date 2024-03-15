@@ -77,7 +77,7 @@ podman login -u init -p 12345678 ${BASTIONFQDN}:8443
 
 ```bash
 cd dockerfiles/ollama-ocp && podman build -t ollama-ocp:1.0 .
-cd ../ollama-web-ocp && podman build -t open-web-ocp:1 .
+cd ../ollama-web-ocp && podman build -t open-web-ocp:1.0 .
 ```
 
 2. **Tag and push images to the private registry**:
