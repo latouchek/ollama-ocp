@@ -60,7 +60,7 @@ sudo update-ca-certificates
 3. **Add Quay CA to the OCP cluster**:
 
 ```bash
-oc create configmap quay-ca --from-file=${BASTIONFQDN}:=./quay-enterprise.pem -n openshift-config
+oc create configmap quay-ca --from-file=${BASTIONFQDN}..8443=./quay-enterprise.pem -n openshift-config
 oc patch image.config.openshift.io/cluster --patch '{"spec":{"additionalTrustedCA":{"name":"quay-ca"}}}' --type=merge
 ```
 
